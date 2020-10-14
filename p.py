@@ -6,7 +6,7 @@ from pprint import pprint
 import os
 import requests
 import urllib.request
-bot = telepot.Bot('1284344621:AAHWm27jrCsz0ACzivSeeipjKNqLF68AZTk')
+bot = telepot.Bot('')
 saveDir = './images/'
 if not os.path.isdir(saveDir):
     os.mkdir(saveDir)
