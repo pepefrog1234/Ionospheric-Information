@@ -44,28 +44,25 @@ def get():  # 圖
         f.write(response.content)
     cloer()
 
+def sendmsg(msg):
+    print(msg)
+    bot.sendMessage(448276213, msg)
+    bot.sendMessage(-1001344449061, msg)
+
 def cloer():
     img = cv2.imread(saveDir + 'Congestus_con.jpg')
     (b, g, r) = img[27, 148]  # 7Mhz 日
     if b == 36 and g == 230 and r == 23:
-        print(a = '7Mhz 白天有傳播!')
-        bot.sendMessage(448276213, a)
-        bot.sendMessage(-1001344449061, a)
+        sendmsg('7Mhz 白天有傳播!')
     (b, g, r) = img[27, 201]  # 14Mhz 日
     if b == 36 and g == 230 and r == 23:
-        print(a = '14Mhz 白天有傳播!')
-        bot.sendMessage(448276213, a)
-        bot.sendMessage(-1001344449061, a)
+        sendmsg('14Mhz 白天有傳播!')
     (b, g, r) = img[72, 149]  # 7Mhz 夜
     if b == 36 and g == 230 and r == 23:
-        print(a = '7Mhz 晚上有傳播!')
-        bot.sendMessage(448276213, a)
-        bot.sendMessage(-1001344449061, a)
+        sendmsg('7Mhz 晚上有傳播!')
     (b, g, r) = img[70, 201]  # 14Mhz 夜
     if b == 36 and g == 230 and r == 23:
-        print(a = '14Mhz 晚上有傳播!')
-        bot.sendMessage(448276213, a)
-        bot.sendMessage(-1001344449061, a)
+        sendmsg('14Mhz 晚上有傳播!')
     # os.remove('./images/Congestus_con.jpg')
 
 MessageLoop(bot, handle).run_as_thread()
