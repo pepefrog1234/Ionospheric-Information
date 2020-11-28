@@ -26,7 +26,7 @@ def handle(msg):
         chat_id = msg['chat']['id']
         from_id = msg['from']['id']
         get()
-        bot.sendPhoto(chat_id, open('./images/Congestus_con.jpg', 'rb'))
+        bot.sendPhoto(chat_id, open(saveDir + 'Congestus_con.jpg', 'rb'))
         cloer()
         ##os.remove('./images/Congestus_con.jpg')
     if '/about' == msg['text'] or '/about@hamradio_bot' == msg['text']:
