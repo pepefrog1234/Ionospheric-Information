@@ -10,8 +10,13 @@ import requests
 import cv2
 import threading
 
-bot = telepot.Bot('INSERT_TELEGRAM_BOT_TOKEN_HERE')
+bot = telepot.Bot('')
 saveDir = '/tmp/hamradio_bot_img/'
+
+prop_day_7 = False
+prop_day_14 = False
+prop_night_7 = False
+prop_night_14 = False
 
 if not os.path.isdir(saveDir):
     os.mkdir(saveDir)
@@ -50,20 +55,48 @@ def sendmsg(msg):
     bot.sendMessage(-1001344449061, msg)
 
 def cloer():
+    global prop_day_7
+    global prop_day_14
+    global prop_night_7
+    global prop_night_14
+
     img = cv2.imread(saveDir + 'Congestus_con.jpg')
     (b, g, r) = img[27, 148]  # 7Mhz 日
     if b == 36 and g == 230 and r == 23:
-        sendmsg('7Mhz 白天有傳播!')
+        if prop_day_7 == False:
+            sendmsg('7Mhz 白天有傳播！')
+            prop_day_7 = True
+    else:
+        if prop_day_7 == True:
+            sendmsg('7Mhz 白天沒傳播了！')
+            prop_day_7 = False
     (b, g, r) = img[27, 201]  # 14Mhz 日
     if b == 36 and g == 230 and r == 23:
-        sendmsg('14Mhz 白天有傳播!')
+        if prop_day_14 == False:
+            sendmsg('14Mhz 白天有傳播!')
+            prop_day_14 = True
+    else:
+        if prop_day_14 == True:
+            sendmsg('14Mhz 白天沒傳播了！')
+            prop_day_14 = False
     (b, g, r) = img[72, 149]  # 7Mhz 夜
     if b == 36 and g == 230 and r == 23:
-        sendmsg('7Mhz 晚上有傳播!')
+        if prop_night_7 == False:
+            sendmsg('7Mhz 晚上有傳播!')
+            prop_night_7 = True
+    else:
+        if prop_night_7 == True:
+            sendmsg('7Mhz 晚上沒傳播了！')
+            prop_night_7 = False
     (b, g, r) = img[70, 201]  # 14Mhz 夜
     if b == 36 and g == 230 and r == 23:
-        sendmsg('14Mhz 晚上有傳播!')
-    # os.remove('./images/Congestus_con.jpg')
+        if prop_night_14 == False:
+            sendmsg('14Mhz 晚上有傳播!')
+            prop_night_14 = True
+    else:
+        if prop_night_14 == True:
+            sendmsg('14Mhz 晚上沒傳播了！')
+            prop_night_14 = False
 
 MessageLoop(bot, handle).run_as_thread()
 print("I'm listening...")
